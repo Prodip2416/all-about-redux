@@ -16,7 +16,6 @@ function App() {
         <AddTask/>
         <TodoList/>
       </Provider>
-
     </div>
   );
 }
