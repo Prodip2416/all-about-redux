@@ -29,6 +29,7 @@ const TodoItem = ({ task }) => {
             <div className="col-md-1">
                 <button className="btn btn-danger" onClick={() => { deleteTask(task) }}>Delete</button>
             </div>
+            
             <hr/>
         </div>
     );
