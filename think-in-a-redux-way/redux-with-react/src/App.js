@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Counter from "./components/Counter";
+import CounterHooks from "./components/CounterHooks";
+import DynamicCounterHooks from "./components/DynamicCounterHooks";
 
 function App() {
   return (
@@ -10,7 +12,9 @@ function App() {
       </h1>
 
       <div className="max-w-md mx-auto mt-10 space-y-5">
-        <Counter author="Prodip Sarker" />
+        {/* <Counter author="Prodip Sarker" /> */}
+        <CounterHooks />
+        <DynamicCounterHooks />
       </div>
     </div>
   );
