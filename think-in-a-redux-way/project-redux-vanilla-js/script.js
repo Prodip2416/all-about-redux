@@ -2,6 +2,9 @@ const incrementEl = document.getElementById("increment");
 const decrementEl = document.getElementById("decrement");
 const totalEl = document.getElementById("total");
 const resetEl = document.getElementById("reset");
+const singleMatchEl = document.getElementById("match");
+const addMatchEl = document.getElementById("add-match");
+const allMatchesEl = document.getElementById("all-matches");
 
 // initial state
 const initialState = {
@@ -96,4 +99,11 @@ resetEl.addEventListener("click", (e) => {
   incrementEl.value = 0;
   decrementEl.value = 0;
   store.dispatch(reset());
+});
+
+// add new match
+addMatchEl.addEventListener("click", (e) => {
+  let singleMatchElClone = singleMatchEl.cloneNode(true);
+  singleMatchElClone.id = "newId";
+  allMatchesEl.appendChild(singleMatchElClone);
 });
