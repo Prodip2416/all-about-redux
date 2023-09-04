@@ -1,7 +1,11 @@
 import React from "react";
 import cancelImg from "../images/cancel.png";
 import { useDispatch } from "react-redux";
-import { deletedTodos, toggledTodos } from "../redux/todos/actions";
+import {
+  colorSelectedTodos,
+  deletedTodos,
+  toggledTodos,
+} from "../redux/todos/actions";
 
 const Todo = ({ todo }) => {
   const dispatch = useDispatch();
@@ -15,6 +19,9 @@ const Todo = ({ todo }) => {
     if (id) {
       dispatch(toggledTodos(id));
     }
+  };
+  const handleColor = (id, color) => {
+    dispatch(colorSelectedTodos(id, color));
   };
   return (
     <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
@@ -53,18 +60,21 @@ const Todo = ({ todo }) => {
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 ${
           todo.color.includes("green") ? "bg-green-500" : ""
         }`}
+        onClick={() => handleColor(todo.id, "green")}
       ></div>
 
       <div
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-yellow-500 hover:bg-yellow-500 ${
           todo.color.includes("yellow") ? "bg-yellow-500" : ""
         }`}
+        onClick={() => handleColor(todo.id, "yellow")}
       ></div>
 
       <div
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-red-500 hover:bg-red-500 ${
           todo.color.includes("red") ? "bg-red-500" : ""
         }`}
+        onClick={() => handleColor(todo.id, "red")}
       ></div>
 
       <img

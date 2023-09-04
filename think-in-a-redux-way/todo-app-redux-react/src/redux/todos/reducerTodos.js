@@ -38,7 +38,7 @@ export const reducerTodos = (state = initialState, action) => {
         if (todo.id == action.payload.id) {
           return {
             ...todo,
-            color: [...action.payload.color],
+            color: [action.payload.color],
           };
         } else {
           return todo;
