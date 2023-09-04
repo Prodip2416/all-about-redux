@@ -10,11 +10,17 @@ export const reducerFilter = (state = initialState, action) => {
       };
 
     case COLOR_FILTER_TODO:
-      return {
-        ...state,
-        color: action.payload.color,
-      };
-
+      if (action.payload.type == "remove") {
+        return {
+          ...state,
+          color: "",
+        };
+      } else if (action.payload.type == "add") {
+        return {
+          ...state,
+          color: action.payload.color,
+        };
+      }
     default:
       return state;
   }

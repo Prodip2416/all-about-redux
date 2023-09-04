@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  colorSelectFilter,
   statusChanged,
   statusSelectFilter,
 } from "../redux/todos-filter/actions";
@@ -23,6 +24,13 @@ const Footer = () => {
   };
   const handleStatus = (status) => {
     dispatch(statusChanged(status));
+  };
+  const handleColor = (color) => {
+    if (filters.color.includes(color)) {
+      dispatch(colorSelectFilter(color, "remove"));
+    } else {
+      dispatch(colorSelectFilter(color, "add"));
+    }
   };
   return (
     <div className="mt-4 flex justify-between text-xs text-gray-500">
@@ -56,9 +64,23 @@ const Footer = () => {
         </li>
         <li></li>
         <li></li>
-        <li className="h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer bg-green-500"></li>
-        <li className="h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer"></li>
-        <li className="h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer"></li>
+        <li
+          className={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer
+           ${filters.color == "green" && "bg-green-500"}`}
+          onClick={() => handleColor("green")}
+        ></li>
+        <li
+          className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer  ${
+            filters.color == "red" && "bg-red-500"
+          }`}
+          onClick={() => handleColor("red")}
+        ></li>
+        <li
+          className={`h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer  ${
+            filters.color == "yellow" && "bg-yellow-500"
+          }`}
+          onClick={() => handleColor("yellow")}
+        ></li>
       </ul>
     </div>
   );

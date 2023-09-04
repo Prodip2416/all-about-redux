@@ -15,11 +15,23 @@ const TodoList = () => {
       return todo.completed;
     }
   };
+  const filterByColor = (todo) => {
+    if (filters.color) {
+      if (todo.color.includes(filters.color)) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  };
   return (
     <div className="mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto">
-      {todos.filter(filterByStatus).map((todo) => {
-        return <Todo todo={todo} />;
-      })}
+      {todos
+        .filter(filterByStatus)
+        .filter(filterByColor)
+        .map((todo) => {
+          return <Todo todo={todo} />;
+        })}
     </div>
   );
 };
