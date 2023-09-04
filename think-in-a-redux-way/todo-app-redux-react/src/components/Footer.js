@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   colorSelectFilter,
   statusChanged,
-  statusSelectFilter,
 } from "../redux/todos-filter/actions";
 
 const Footer = () => {
