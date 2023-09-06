@@ -1,6 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addProduct } from "../redux/product/actions";
 
 const ProductInput = () => {
+  const totalProduct = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const [product, setProduct] = useState({
+    id: 0,
+    title: "",
+    category: "",
+    imageUrl: "",
+    price: 0,
+    quantity: 0,
+  });
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    if (
+      product.title &&
+      product.category &&
+      product.imageUrl &&
+      product.price &&
+      product.quantity
+    ) {
+      const newProduct = {
+        ...product,
+        id: totalProduct.length + 1,
+      };
+      dispatch(addProduct(newProduct));
+      setProduct({
+        id: 0,
+        title: "",
+        category: "",
+        imageUrl: "",
+        price: 0,
+        quantity: 0,
+      });
+    } else {
+      alert("Please enter all the information");
+    }
+  };
   return (
     <div className="formContainer">
       <h4 className="formTitle">Add New Product</h4>
@@ -13,6 +53,8 @@ const ProductInput = () => {
             id="lws-inputName"
             type="text"
             required
+            value={product.title}
+            onChange={(e) => setProduct({ ...product, title: e.target.value })}
           />
         </div>
         {/* <!-- product category --> */}
@@ -23,6 +65,10 @@ const ProductInput = () => {
             id="lws-inputCategory"
             type="text"
             required
+            value={product.category}
+            onChange={(e) =>
+              setProduct({ ...product, category: e.target.value })
+            }
           />
         </div>
         {/* <!-- product image url --> */}
@@ -33,6 +79,10 @@ const ProductInput = () => {
             id="lws-inputImage"
             type="text"
             required
+            value={product.imageUrl}
+            onChange={(e) =>
+              setProduct({ ...product, imageUrl: e.target.value })
+            }
           />
         </div>
         {/* <!-- price & quantity container --> */}
@@ -45,6 +95,10 @@ const ProductInput = () => {
               type="number"
               id="lws-inputPrice"
               required
+              value={product.price}
+              onChange={(e) =>
+                setProduct({ ...product, price: e.target.valueAsNumber })
+              }
             />
           </div>
           {/* <!-- quantity --> */}
@@ -55,11 +109,20 @@ const ProductInput = () => {
               type="number"
               id="lws-inputQuantity"
               required
+              value={product.quantity}
+              onChange={(e) =>
+                setProduct({ ...product, quantity: e.target.valueAsNumber })
+              }
             />
           </div>
         </div>
         {/* <!-- submit button --> */}
-        <button type="submit" id="lws-inputSubmit" className="submit">
+        <button
+          type="submit"
+          id="lws-inputSubmit"
+          className="submit"
+          onClick={handleClick}
+        >
           Add Product
         </button>
       </form>

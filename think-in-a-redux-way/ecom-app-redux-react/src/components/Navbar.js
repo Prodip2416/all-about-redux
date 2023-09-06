@@ -1,14 +1,19 @@
 import React from "react";
 import logo from "../images/logo.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggledMenu } from "../redux/menu/actions";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const carts = useSelector((state) => state.carts);
 
   const handleToggled = (menu) => {
     dispatch(toggledMenu(menu));
   };
+  const getTotalCartItem = (totalCart) => {
+    return totalCart.reduce((quantity, item) => quantity + item.quantity, 0);
+  };
+  console.log(carts);
   return (
     <nav className="bg-[#171C2A] py-4">
       <div className="navBar">
@@ -31,7 +36,7 @@ const Navbar = () => {
             onClick={() => handleToggled("cart")}
           >
             <i className="text-xl fa-sharp fa-solid fa-bag-shopping"></i>
-            <span id="lws-totalCart">0</span>
+            <span id="lws-totalCart">{getTotalCartItem(carts)}</span>
           </span>
         </div>
       </div>
